@@ -1,10 +1,40 @@
 import styles from './index.less';
-import React from 'react';
+import React, { useState } from 'react';
+import { Drawer } from 'antd';
+import { useModel, MicroAppWithMemoHistory, connectMaster } from 'umi';
 
-export default function IndexPage() {
+const IndexPage = (props) => {
+  const { globalState } = useModel('@@qiankunStateFromMaster') || {};
+  const { initialState, setInitialState } = useModel('@@initialState');
+
+  console.log(initialState);
+
+  const [visible, setVisible] = useState(false);
+  console.log(props);
+
   return (
     <div>
       <h1 className={styles.title}>app1</h1>
+      <p>globalState: {JSON.stringify(globalState)}</p>
+      <button
+        onClick={() => {
+          setVisible(true);
+        }}
+      >
+        打开 app2
+      </button>
+      <Drawer
+        title="嵌入 app2"
+        visible={visible}
+        onClose={() => {
+          setVisible(false);
+        }}
+        width={800}
+      >
+        <MicroAppWithMemoHistory name="app2" url="/" current={2} pageSize={5} />
+      </Drawer>
     </div>
   );
-}
+};
+
+export default connectMaster(IndexPage);

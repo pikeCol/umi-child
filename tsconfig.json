@@ -11,10 +11,7 @@
     "noImplicitReturns": true,
     "suppressImplicitAnyIndexErrors": true,
     "declaration": true,
-    "skipLibCheck": true,
-    "paths": {
-      "@@": ["./example/*"]
-    }
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules",
