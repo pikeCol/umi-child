@@ -4,13 +4,10 @@ import { Drawer } from 'antd';
 import { useModel, MicroAppWithMemoHistory, connectMaster } from 'umi';
 
 const IndexPage = (props) => {
-  const { globalState } = useModel('@@qiankunStateFromMaster') || {};
+  const globalState = useModel('@@qiankunStateFromMaster') || {};
   const { initialState, setInitialState } = useModel('@@initialState');
-
-  console.log(initialState);
-
   const [visible, setVisible] = useState(false);
-  console.log(props);
+  console.log(globalState);
 
   return (
     <div>
